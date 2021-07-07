@@ -7,12 +7,12 @@ const farms: FarmConfig[] = [
     risk: 5,
     lpSymbol: 'DEEDEE-BNB LP',
     lpAddresses: {
-      97: '0x5efD84dc95C0192De06b38B133c935a809baE6AA',
+      97: '0x9EF942E008D8b7d7D53CDA970325c2B0a8F90739',
       56: '0x8D49bC7DFcBB7287d3eE8AF97f76453586BceaE3',
     },
     tokenSymbol: 'DEEDEE',
     tokenAddresses: {
-      97: '0xDF5AabC5f4969f2544DFf89974D3D88b3e35FF09',
+      97: '0x3708c555D8Bbb803728be65d0f33e8A3EcB365C7',
       56: '0x8F16A16EaCAA15D2e17Fd97657cbfAa8066626aE',
     },
     quoteTokenSymbol: QuoteToken.BNB,
@@ -23,12 +23,12 @@ const farms: FarmConfig[] = [
     risk: 5,
     lpSymbol: 'DEEDEE-BUSD LP',
     lpAddresses: {
-      97: '0x501d55D52EC02AfFFBE0b5056137D826Ec8B8F31',
+      97: '0x96fFf69411168180e87debE7481Fa7e330B3Aba9',
       56: '0xCad824718eD4D711ad18c01b98E63267Fac4E3f5',
     },
     tokenSymbol: 'DEEDEE',
     tokenAddresses: {
-      97: '0xDF5AabC5f4969f2544DFf89974D3D88b3e35FF09',
+      97: '0x3708c555D8Bbb803728be65d0f33e8A3EcB365C7',
       56: '0x8F16A16EaCAA15D2e17Fd97657cbfAa8066626aE',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
@@ -40,12 +40,12 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     lpSymbol: 'DEEDEE',
     lpAddresses: {
-      97: '0x501d55D52EC02AfFFBE0b5056137D826Ec8B8F31',
+      97: '0x96fFf69411168180e87debE7481Fa7e330B3Aba9',
       56: '0xCad824718eD4D711ad18c01b98E63267Fac4E3f5', // DEEDEE-BUSD LP
     },
     tokenSymbol: 'DEEDEE',
     tokenAddresses: {
-      97: '0xDF5AabC5f4969f2544DFf89974D3D88b3e35FF09',
+      97: '0x3708c555D8Bbb803728be65d0f33e8A3EcB365C7',
       56: '0x8F16A16EaCAA15D2e17Fd97657cbfAa8066626aE',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
