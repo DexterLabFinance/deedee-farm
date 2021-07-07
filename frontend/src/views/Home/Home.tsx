@@ -61,6 +61,9 @@ const Home: React.FC = () => {
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {'DexterLab Finance'}
         </Heading>
+        <Heading as="h1" size="lg" mb="36px" color="success">
+          {'DeeDee edition'}
+        </Heading>
         <Text>{TranslateString(578, 'The most cartoonish DEFI app on Binance Smart Chain.')}</Text>
       </Hero>
       <div>
