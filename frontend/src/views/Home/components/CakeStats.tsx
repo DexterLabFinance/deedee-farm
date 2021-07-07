@@ -32,16 +32,16 @@ const CakeStats = () => {
   const cakeSupply = getBalanceNumber(circSupply);
   const marketCap = eggPrice.times(circSupply);
 
-  let dxlPerBlock = 0;
-  if(farms && farms[0] && farms[0].dxlPerBlock){
-    dxlPerBlock = new BigNumber(farms[0].dxlPerBlock).div(new BigNumber(10).pow(18)).toNumber();
+  let deedeePerBlock = 0;
+  if(farms && farms[0] && farms[0].deedeePerBlock){
+    deedeePerBlock = new BigNumber(farms[0].deedeePerBlock).div(new BigNumber(10).pow(18)).toNumber();
   }
 
   return (
     <StyledCakeStats>
       <CardBody>
         <Heading size="xl" mb="24px">
-          {TranslateString(534, 'DXL Stats')}
+          {TranslateString(534, 'DEEDEE Stats')}
         </Heading>
         <Row>
           <Text fontSize="14px">{TranslateString(10005, 'Market Cap')}</Text>
@@ -60,8 +60,8 @@ const CakeStats = () => {
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New DXL/block')}</Text>
-          <Text bold fontSize="14px">{dxlPerBlock}</Text>
+          <Text fontSize="14px">{TranslateString(540, 'New DEEDEE/block')}</Text>
+          <Text bold fontSize="14px">{deedeePerBlock}</Text>
         </Row>
       </CardBody>
     </StyledCakeStats>

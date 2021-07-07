@@ -47,12 +47,12 @@ const config: MenuEntry[] = [
         href: '/',
       },
       {
-        label: 'DXL Chart',
+        label: 'DEEDEE Chart',
         href: 'https://poocoin.app/tokens/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
       },
       {
         label: 'Dappradar',
-        href: 'https://dappradar.com/binance-smart-chain/defi/dxl-cartoonish-yield-farm',
+        href: 'https://dappradar.com/binance-smart-chain/defi/DEEDEE-cartoonish-yield-farm',
       },
       {
         label: 'dapp.com',

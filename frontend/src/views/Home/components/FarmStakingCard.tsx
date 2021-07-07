@@ -71,14 +71,14 @@ const FarmedStakingCard = () => {
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Farms & Staking')}
         </Heading>
-        <CardImage src="/images/dexl/farms_monkey1.png" alt="dxl logo" width={64} height={64} />
+        <CardImage src="/images/dexl/farms_monkey1.png" alt="DEEDEE logo" width={64} height={64} />
         <Block>
-          <Label>{TranslateString(544, 'DXL to Harvest')}</Label>
+          <Label>{TranslateString(544, 'DEEDEE to Harvest')}</Label>
           <CakeHarvestBalance earningsSum={earningsSum}/>
           <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
         </Block>
         <Block>
-          <Label>{TranslateString(546, 'DXL in Wallet')}</Label>
+          <Label>{TranslateString(546, 'DEEDEE in Wallet')}</Label>
           <CakeWalletBalance cakeBalance={cakeBalance} />
           <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
         </Block>
@@ -91,7 +91,7 @@ const FarmedStakingCard = () => {
               fullWidth
             >
               {pendingTx
-                ? TranslateString(548, 'Collecting DXL')
+                ? TranslateString(548, 'Collecting DEEDEE')
                 : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
             </Button>
           ) : (
