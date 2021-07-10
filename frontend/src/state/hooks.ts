@@ -42,6 +42,7 @@ export const useFarmUser = (pid) => {
     tokenBalance: farm.userData ? new BigNumber(farm.userData.tokenBalance) : new BigNumber(0),
     stakedBalance: farm.userData ? new BigNumber(farm.userData.stakedBalance) : new BigNumber(0),
     earnings: farm.userData ? new BigNumber(farm.userData.earnings) : new BigNumber(0),
+    harvestTax: farm.userData ? new BigNumber(farm.userData.harvestTax) : new BigNumber(0),
   }
 }
 
@@ -69,7 +70,7 @@ export const usePoolFromPid = (sousId): Pool => {
 // Prices
 
 export const usePriceBnbBusd = (): BigNumber => {
-  const pid = 4 // BUSD-BNB LP
+  const pid = 4 // BNB-BUSD LP
   const farm = useFarmFromPid(pid)
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
