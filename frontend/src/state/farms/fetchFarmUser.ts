@@ -75,20 +75,20 @@ export const fetchFarmUserEarnings = async (account: string) => {
   return parsedEarnings
 }
 
-export const fetchFarmUserHarvestTax = async (account: string) => {
-  const masterChefAdress = getMasterChefAddress()
-
-  const calls = farmsConfig.map((farm) => {
-    return {
-      address: masterChefAdress,
-      name: 'harvestTax',
-      params: [farm.pid, account],
-    }
-  })
-
-  const rawHarvestTax = await multicall(masterchefABI, calls)
-  const parsedHarvestTax = rawHarvestTax.map((harvestTax) => {
-    return new BigNumber(harvestTax).toJSON()
-  })
-  return parsedHarvestTax
-}
+// export const fetchFarmUserHarvestTax = async (account: string) => {
+//   const masterChefAdress = getMasterChefAddress()
+//
+//   const calls = farmsConfig.map((farm) => {
+//     return {
+//       address: masterChefAdress,
+//       name: 'harvestTax',
+//       params: [farm.pid, account],
+//     }
+//   })
+//
+//   const rawHarvestTax = await multicall(masterchefABI, calls)
+//   const parsedHarvestTax = rawHarvestTax.map((harvestTax) => {
+//     return new BigNumber(harvestTax).toJSON()
+//   })
+//   return parsedHarvestTax
+// }
