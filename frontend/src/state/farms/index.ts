@@ -7,7 +7,7 @@ import {
   fetchFarmUserAllowances,
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
-  fetchFarmUserHarvestTax
+//  fetchFarmUserHarvestTax
 } from './fetchFarmUser'
 import { FarmsState, Farm } from '../types'
 
