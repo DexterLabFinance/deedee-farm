@@ -168,7 +168,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex>
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Harvest Tax')}:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{(farm.userData.harvestTax / 100)}%</Text>
+        <Text bold style={{ fontSize: '24px' }}>{(farm.userData.harvestTax)}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Tax Period')}:</Text>
