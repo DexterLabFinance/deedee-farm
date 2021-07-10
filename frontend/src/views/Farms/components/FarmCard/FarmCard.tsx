@@ -168,7 +168,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex>
 
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Tax Period')}:</Text>
+        <Text style={{ fontSize: '24px' }}>Tax Period:</Text>
         <Text bold style={{ fontSize: '24px' }}>{(farm.harvestInterval)}</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
