@@ -57,6 +57,15 @@ contract MasterChef is Ownable {
     address public devaddr;
     // DEEDEE tokens created per block.
     uint256 public deedeePerBlock;
+    // final DEEDEE per block after emission reduction.
+    uint256 public targetDeedeePerBlock;
+    // emission halving time
+    uint256 public deedeePerBlockHalvingTime = block.timestamp;
+    // emission halving interval (default 12h)
+    uint256 public deedeeHalvingInterval = 43200;
+    // emission decrease percentage (default 3%)
+    uint256 public emissionRateDecreasePerBlock = 3;
+
     // Bonus muliplier for early DEEDEE makers.
     uint256 public constant BONUS_MULTIPLIER = 1;
     // Deposit Fee address
@@ -106,12 +115,14 @@ contract MasterChef is Ownable {
         address _devaddr,
         address _feeAddress,
         uint256 _deedeePerBlock,
+        uint256 _targetDeedeePerBlock,
         uint256 _startBlock
     ) public {
         DEEDEE = _DEEDEE;
         devaddr = _devaddr;
         feeAddress = _feeAddress;
         deedeePerBlock = _deedeePerBlock;
+        targetDeedeePerBlock = _targetDeedeePerBlock;
         startBlock = _startBlock;
     }
 
@@ -227,6 +238,9 @@ contract MasterChef is Ownable {
             pool.lastRewardBlock = block.number;
             return;
         }
+
+        autoReduceEmissionRate();
+
         uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
         uint256 deedeeReward = multiplier.mul(deedeePerBlock).mul(pool.allocPoint).div(totalAllocPoint);
         DEEDEE.mint(devaddr, deedeeReward.div(10));
@@ -276,7 +290,7 @@ contract MasterChef is Ownable {
         UserInfo storage user = userInfo[_pid][msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
         updatePool(_pid);
-        payOrLockupPendingDEEDEE(_pid, _amount);
+        payOrLockupPendingDEEDEE(_pid, false, _amount);
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
             pool.lpToken.safeTransfer(address(msg.sender), _amount);
@@ -327,7 +341,7 @@ contract MasterChef is Ownable {
                 if (pool.isBoostEnabled && user.boost > 0) {
                     uint256 boostAmount = totalRewards.mul(user.boost).div(10000);
                     totalRewards = totalRewards.add(boostAmount);
-                    venus.mint(address(this), boostAmount);
+                    DEEDEE.mint(address(this), boostAmount);
                 }
 
                 if (_boost) {
@@ -393,7 +407,7 @@ contract MasterChef is Ownable {
         PoolInfo storage pool = poolInfo[_pid];
         pool.isBoostEnabled = _isBoostEnabled;
     }
-    
+
     // Update dev address by the previous dev.
     function dev(address _devaddr) public {
         require(msg.sender == devaddr, "dev: wut?");
@@ -409,6 +423,27 @@ contract MasterChef is Ownable {
     function updateEmissionRate(uint256 _deedeePerBlock) public onlyOwner {
         massUpdatePools();
         deedeePerBlock = _deedeePerBlock;
+    }
+
+    //Update emission halving settings
+    function updateEmissionHalving(uint256 _deedeeHalvingInterval, uint256 _emissionRateDecreasePerBlock, uint256 _targetDeedeePerBlock) public onlyOwner {
+        massUpdatePools();
+        deedeeHalvingInterval = _deedeeHalvingInterval;
+        emissionRateDecreasePerBlock = _emissionRateDecreasePerBlock;
+        targetDeedeePerBlock = _targetDeedeePerBlock;
+    }
+
+    //auto-reduce emission
+    function autoReduceEmissionRate() internal returns (bool) {
+        uint deedeePerBlockCurrentTime = block.timestamp;
+        // if 12h passed and deedeePerBlock > 0.03
+        if((deedeePerBlockCurrentTime.sub(deedeePerBlockHalvingTime) >= deedeeHalvingInterval) && (deedeePerBlock > targetDeedeePerBlock)){
+            if(deedeePerBlock.sub(deedeePerBlock.mul(emissionRateDecreasePerBlock).div(100)) < targetDeedeePerBlock) deedeePerBlock = targetDeedeePerBlock;
+            else deedeePerBlock = deedeePerBlock.sub(deedeePerBlock.mul(emissionRateDecreasePerBlock).div(100));
+
+            deedeePerBlockHalvingTime = deedeePerBlockCurrentTime;
+        }
+        return true;
     }
 
     // Update start reward block
