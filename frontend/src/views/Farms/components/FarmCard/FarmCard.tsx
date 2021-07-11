@@ -166,16 +166,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text bold>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
+        <Text style={{ fontSize: '18px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{(farm.depositFeeBP / 100)}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '24px' }}>Harvest Tax:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{harvestTax}%</Text>
+        <Text style={{ fontSize: '18px' }}>Harvest Tax:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{harvestTax}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '24px' }}>Tax Period:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{farm.harvestInterval/3600}h</Text>
+        <Text style={{ fontSize: '18px' }}>Tax Period:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{farm.harvestInterval/3600}h</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />
