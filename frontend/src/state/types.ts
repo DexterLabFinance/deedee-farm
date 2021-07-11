@@ -15,7 +15,7 @@ export interface Farm extends FarmConfig {
     tokenBalance: BigNumber
     stakedBalance: BigNumber
     earnings: BigNumber
-  //  harvestTax: BigNumber
+    harvestTax?: number
   }
 }
 

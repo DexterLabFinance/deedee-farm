@@ -12,6 +12,7 @@ import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
 import ApyButton from './ApyButton'
+import { useFarmUser } from 'state/hooks'
 
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
@@ -125,6 +126,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
 
+  const { harvestTax} = useFarmUser(farm.pid)
+
   return (
     <FCard>
       {farm.tokenSymbol === 'DEEDEE' && <StyledCardAccent />}
@@ -166,10 +169,13 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
         <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
       </Flex>
-
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '24px' }}>Harvest Tax:</Text>
+        <Text bold style={{ fontSize: '24px' }}>{harvestTax}%</Text>
+      </Flex>
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '24px' }}>Tax Period:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{(farm.harvestInterval)}</Text>
+        <Text bold style={{ fontSize: '24px' }}>{farm.harvestInterval/3600}h</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />
