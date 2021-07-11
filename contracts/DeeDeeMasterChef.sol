@@ -26,6 +26,7 @@ contract MasterChef is Ownable {
         uint256 rewardDebt;     // Reward debt. See explanation below.
         uint256 rewardLockedUp;  // Reward locked up.
         uint256 nextHarvestUntil; // When can the user harvest again.
+        uint256 boost; // current user boost for this pool.
         //
         // We do some fancy math here. Basically, any point in time, the amount of DEEDEEs
         // entitled to a user but is pending to be distributed is:
@@ -47,6 +48,7 @@ contract MasterChef is Ownable {
         uint256 accDEEDEEPerShare;   // Accumulated DEEDEEs per share, times 1e12. See below.
         uint16 depositFeeBP;      // Deposit fee in basis points
         uint256 harvestInterval;  // Harvest interval in seconds
+        bool isBoostEnabled;      // Is boost enabled for this Pool
     }
 
     // The DEEDEE TOKEN!
@@ -59,6 +61,15 @@ contract MasterChef is Ownable {
     uint256 public constant BONUS_MULTIPLIER = 1;
     // Deposit Fee address
     address public feeAddress;
+
+    //Amount to be added to the boost on every click of the boost button. 100 means 1% increase
+    uint256 public userBoostAmount = 10000;
+    //Amount % to be paid for doing Boost on a Farm/Pool
+    uint256 public poolBoostFeeAmount = 50;
+    //max boost per pool
+    uint256 public maxBoostAmount = 30000;
+    // total amount of tokens minted due to boost
+    uint256 public totalBoostedtokens = 0;
 
     // Info of each pool.
     PoolInfo[] public poolInfo;
@@ -88,6 +99,7 @@ contract MasterChef is Ownable {
     event Harvest(address indexed user, uint256 indexed pid, uint256 amountHarvest);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event RewardLockedUp(address indexed user, uint256 indexed pid, uint256 amountLockedUp);
+    event Boost(address indexed user, uint256 indexed pid, uint256 userBoost);
 
     constructor(
         DeeDee _DEEDEE,
@@ -127,7 +139,8 @@ contract MasterChef is Ownable {
             lastRewardBlock: lastRewardBlock,
             accDEEDEEPerShare: 0,
             depositFeeBP: _depositFeeBP,
-            harvestInterval : _harvestInterval
+            harvestInterval : _harvestInterval,
+            isBoostEnabled : false
         }));
     }
 
@@ -161,6 +174,11 @@ contract MasterChef is Ownable {
             accDEEDEEPerShare = accDEEDEEPerShare.add(deedeeReward.mul(1e12).div(lpSupply));
         }
         uint256 pending = user.amount.mul(accDEEDEEPerShare).div(1e12).sub(user.rewardDebt);
+
+        if (pool.isBoostEnabled && user.boost > 0) {
+            uint256 boostAmount = pending.mul(user.boost).div(10000);
+            pending = pending.add(boostAmount);
+        }
 
         return pending.add(user.rewardLockedUp);
     }
@@ -218,12 +236,19 @@ contract MasterChef is Ownable {
     }
 
     // Deposit LP tokens to MasterChef for DEEDEE allocation.
-    function deposit(uint256 _pid, uint256 _amount) public {
+    function deposit(uint256 _pid, uint256 _amount, bool _boost) public {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);
-        payOrLockupPendingDEEDEE(_pid, _amount);
-        if(_amount > 0) {
+
+        if (_boost) {
+            require(pool.isBoostEnabled, "deposit:BOOST NOT ENABlED");
+            require(canHarvest(_pid, msg.sender),'deposit:boost:BOOSTNOTREADY');
+        }
+
+        payOrLockupPendingDEEDEE(_pid, _boost, _amount);
+
+        if(!_boost && _amount > 0) {
             pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
             if(pool.depositFeeBP > 0){
                 uint256 depositFee = _amount.mul(pool.depositFeeBP).div(10000);
@@ -282,7 +307,7 @@ contract MasterChef is Ownable {
     }
 
     // Pay or lockup pending DEEDEE.
-    function payOrLockupPendingDEEDEE(uint256 _pid, uint256 _amount) internal {
+    function payOrLockupPendingDEEDEE(uint256 _pid, bool _boost, uint256 _amount) internal {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
 
@@ -294,19 +319,42 @@ contract MasterChef is Ownable {
 
         if (pending > 0 || user.rewardLockedUp > 0) {
 
-            if (_amount == 0) { // User wanna harvest
+            if (_boost || _amount == 0) { // User wanna boost or harvest
 
                 uint256 totalRewards = pending.add(user.rewardLockedUp);
 
-                //Check Harvest Tax
-                uint256 harvestTaxAmount = harvestTax(_pid, msg.sender);
-                uint256 taxRewards = totalRewards.mul(harvestTaxAmount).div(100);
-                uint256 netRewards = totalRewards.sub(taxRewards);
+                //Check if pool boost is enabled and add to total rewards
+                if (pool.isBoostEnabled && user.boost > 0) {
+                    uint256 boostAmount = totalRewards.mul(user.boost).div(10000);
+                    totalRewards = totalRewards.add(boostAmount);
+                    venus.mint(address(this), boostAmount);
+                }
 
-                // send rewards
-                safeDEEDEETransfer(feeAddress, taxRewards);
-                safeDEEDEETransfer(msg.sender, netRewards);
-                emit Harvest(msg.sender, _pid, netRewards);
+                if (_boost) {
+                    //add to poolBoost
+                    user.boost = user.boost.add(userBoostAmount);
+                    if (user.boost > maxBoostAmount) {
+                        user.boost = maxBoostAmount;
+                    }
+                    //discount poolBoostFeeAmount=50%
+                    uint256 halfRewards = totalRewards.mul(poolBoostFeeAmount).div(100);
+                    safeDEEDEETransfer(feeAddress, halfRewards);
+                    safeDEEDEETransfer(msg.sender, halfRewards);
+                    //user.nextHarvestUntil = user.nextHarvestUntil.add(pool.harvestInterval);
+                    emit Boost(msg.sender, _pid, user.boost);
+
+                } else {
+
+                    //Check Harvest Tax
+                    uint256 harvestTaxAmount = harvestTax(_pid, msg.sender);
+                    uint256 taxRewards = totalRewards.mul(harvestTaxAmount).div(100);
+                    uint256 netRewards = totalRewards.sub(taxRewards);
+
+                    // send rewards
+                    safeDEEDEETransfer(feeAddress, taxRewards);
+                    safeDEEDEETransfer(msg.sender, netRewards);
+                    emit Harvest(msg.sender, _pid, netRewards);
+                }
 
                 // reset lockup
                 totalLockedUpRewards = totalLockedUpRewards.sub(user.rewardLockedUp);
@@ -335,6 +383,17 @@ contract MasterChef is Ownable {
         }
     }
 
+    function setBoostAmounts (uint256 _maxBoostAmount, uint256 _userBoostAmount, uint256 _poolBoostFeeAmount) public onlyOwner {
+        maxBoostAmount = _maxBoostAmount;
+        userBoostAmount = _userBoostAmount;
+        poolBoostFeeAmount = _poolBoostFeeAmount;
+    }
+
+    function setPoolBoost (uint256 _pid, bool _isBoostEnabled) public onlyOwner {
+        PoolInfo storage pool = poolInfo[_pid];
+        pool.isBoostEnabled = _isBoostEnabled;
+    }
+    
     // Update dev address by the previous dev.
     function dev(address _devaddr) public {
         require(msg.sender == devaddr, "dev: wut?");

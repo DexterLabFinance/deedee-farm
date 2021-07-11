@@ -39,14 +39,6 @@ const config: MenuEntry[] = [
         href: 'https://pancakeswap.info/token/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
       },
       {
-        label: 'CoinGecko (soon)',
-        href: '/',
-      },
-      {
-        label: 'CoinMarketCap (soon)',
-        href: '/',
-      },
-      {
         label: 'DEEDEE Chart',
         href: 'https://poocoin.app/tokens/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
       },
