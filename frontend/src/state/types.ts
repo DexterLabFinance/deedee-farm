@@ -10,6 +10,8 @@ export interface Farm extends FarmConfig {
   depositFeeBP?: number
   harvestInterval?: number
   deedeePerBlock?: number
+  maxBoostAmount?: number
+  poolBoostFeeAmount?: number
     userData?: {
     allowance: BigNumber
     tokenBalance: BigNumber

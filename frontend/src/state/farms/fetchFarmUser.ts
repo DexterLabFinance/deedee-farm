@@ -106,7 +106,7 @@ export const fetchFarmUserBoost = async (account: string) => {
 
   const rawBoost = await multicall(masterchefABI, calls)
   const parsedBoost = rawBoost.map((boost) => {
-    return new BigNumber(boost[4]).toJSON()
+    return new BigNumber(boost[4]._hex).toJSON()
   })
   return parsedBoost
 }
