@@ -179,7 +179,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex>
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '18px' }}>Current Boost:</Text>
-        <Text bold style={{ fontSize: '18px' }}>{farm.userPoolBoost/100}%</Text>
+        <Text bold style={{ fontSize: '18px' }}>{userPoolBoost}%</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />
