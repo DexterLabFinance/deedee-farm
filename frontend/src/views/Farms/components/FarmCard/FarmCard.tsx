@@ -12,6 +12,7 @@ import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
 import ApyButton from './ApyButton'
+import { useFarmUser } from 'state/hooks'
 
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
@@ -125,6 +126,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
 
+  const { harvestTax, userPoolBoost } = useFarmUser(farm.pid)
+
   return (
     <FCard>
       {farm.tokenSymbol === 'DEEDEE' && <StyledCardAccent />}
@@ -163,8 +166,28 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text bold>{earnLabel}</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
-        <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
+        <Text style={{ fontSize: '18px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{(farm.depositFeeBP / 100)}%</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Harvest Tax:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{harvestTax}%</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Tax Period:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{farm.harvestInterval/3600}h</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Current Boost:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{userPoolBoost > 0 ? userPoolBoost/100 : userPoolBoost}%</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Max Boost:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{farm.maxBoostAmount/100}%</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Boost Fee:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{farm.poolBoostFeeAmount}%</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />

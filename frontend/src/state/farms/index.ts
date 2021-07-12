@@ -7,6 +7,8 @@ import {
   fetchFarmUserAllowances,
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
+  fetchFarmUserHarvestTax,
+  fetchFarmUserBoost
 } from './fetchFarmUser'
 import { FarmsState, Farm } from '../types'
 
@@ -46,6 +48,8 @@ export const fetchFarmUserDataAsync = (account) => async (dispatch) => {
   const userFarmTokenBalances = await fetchFarmUserTokenBalances(account)
   const userStakedBalances = await fetchFarmUserStakedBalances(account)
   const userFarmEarnings = await fetchFarmUserEarnings(account)
+  const userFarmHarvestTax = await fetchFarmUserHarvestTax(account)
+  const userFarmBoost = await fetchFarmUserBoost(account)
 
   const arrayOfUserDataObjects = userFarmAllowances.map((farmAllowance, index) => {
     return {
@@ -54,6 +58,8 @@ export const fetchFarmUserDataAsync = (account) => async (dispatch) => {
       tokenBalance: userFarmTokenBalances[index],
       stakedBalance: userStakedBalances[index],
       earnings: userFarmEarnings[index],
+      harvestTax: userFarmHarvestTax[index],
+      userPoolBoost: userFarmBoost[index]
     }
   })
 

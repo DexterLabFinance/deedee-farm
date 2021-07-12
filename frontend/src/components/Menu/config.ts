@@ -2,6 +2,24 @@ import { MenuEntry } from '@pancakeswap-libs/uikit'
 
 const config: MenuEntry[] = [
   {
+    label: 'Editions',
+    icon: 'HomeIcon',
+    items: [
+      {
+        label: 'Dexter',
+        href: 'https://dexterlab-farm.vercel.app/',
+      },
+      {
+        label: 'DeeDees',
+        href: 'https://deedee-farm.vercel.app/',
+      },
+      {
+        label: 'Mandark (In Progress)',
+        href: '/',
+      }
+    ],
+  },
+  {
     label: 'Home',
     icon: 'HomeIcon',
     href: '/',
@@ -37,14 +55,6 @@ const config: MenuEntry[] = [
       {
         label: 'PancakeSwap',
         href: 'https://pancakeswap.info/token/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
-      },
-      {
-        label: 'CoinGecko (soon)',
-        href: '/',
-      },
-      {
-        label: 'CoinMarketCap (soon)',
-        href: '/',
       },
       {
         label: 'DEEDEE Chart',

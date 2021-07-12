@@ -11,7 +11,7 @@ export const useHarvest = (farmPid: number) => {
   const masterChefContract = useMasterchef()
 
   const handleHarvest = useCallback(async () => {
-    const txHash = await harvest(masterChefContract, farmPid, account)
+    const txHash = await harvest(masterChefContract, farmPid, false, account)
     dispatch(fetchFarmUserDataAsync(account))
     return txHash
   }, [account, dispatch, farmPid, masterChefContract])
@@ -25,7 +25,7 @@ export const useAllHarvest = (farmPids: number[]) => {
 
   const handleHarvest = useCallback(async () => {
     const harvestPromises = farmPids.reduce((accum, pid) => {
-      return [...accum, harvest(masterChefContract, pid, account)]
+      return [...accum, harvest(masterChefContract, pid, false, account)]
     }, [])
 
     return Promise.all(harvestPromises)
@@ -42,7 +42,7 @@ export const useSousHarvest = (sousId, isUsingBnb = false) => {
 
   const handleHarvest = useCallback(async () => {
     if (sousId === 0) {
-      await harvest(masterChefContract, 0, account)
+      await harvest(masterChefContract, 0, false, account)
     } else if (isUsingBnb) {
       await soushHarvestBnb(sousChefContract, account)
     } else {

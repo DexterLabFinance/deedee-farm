@@ -95,6 +95,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     [bnbPrice, account, cakePrice, ethereum],
   )
 
+
   return (
     <Page>
       <Heading as="h1" size="lg" color="primary" mb="50px" style={{ textAlign: 'center' }}>
