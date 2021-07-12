@@ -11,6 +11,7 @@ import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
+import BoostAction from './BoostAction'
 
 const Action = styled.div`
   padding-top: 16px;
@@ -84,6 +85,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
           {TranslateString(999, 'Staked')}
         </Text>
       </Flex>
+      <BoostAction earnings={earnings} pid={pid} />
       {!account ? <UnlockButton mt="8px" fullWidth /> : renderApprovalOrStakeButton()}
     </Action>
   )

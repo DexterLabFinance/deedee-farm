@@ -16,6 +16,7 @@ export interface Farm extends FarmConfig {
     stakedBalance: BigNumber
     earnings: BigNumber
     harvestTax?: number
+    userPoolBoost?: number
   }
 }
 

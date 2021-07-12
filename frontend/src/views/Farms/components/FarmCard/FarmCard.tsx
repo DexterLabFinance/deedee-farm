@@ -126,7 +126,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   const { quoteTokenAdresses, quoteTokenSymbol, tokenAddresses, risk } = farm
 
-  const { harvestTax} = useFarmUser(farm.pid)
+  const { harvestTax, userPoolBoost } = useFarmUser(farm.pid)
 
   return (
     <FCard>
@@ -176,6 +176,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '18px' }}>Tax Period:</Text>
         <Text bold style={{ fontSize: '18px' }}>{farm.harvestInterval/3600}h</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '18px' }}>Current Boost:</Text>
+        <Text bold style={{ fontSize: '18px' }}>{farm.userPoolBoost/100}%</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />

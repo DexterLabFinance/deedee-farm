@@ -92,3 +92,21 @@ export const fetchFarmUserHarvestTax = async (account: string) => {
   })
   return parsedHarvestTax
 }
+
+export const fetchFarmUserBoost = async (account: string) => {
+  const masterChefAdress = getMasterChefAddress()
+
+  const calls = farmsConfig.map((farm) => {
+    return {
+      address: masterChefAdress,
+      name: 'userInfo',
+      params: [farm.pid, account],
+    }
+  })
+
+  const rawBoost = await multicall(masterchefABI, calls)
+  const parsedBoost = rawBoost.map((boost) => {
+    return new BigNumber(boost[4]).toJSON()
+  })
+  return parsedBoost
+}
