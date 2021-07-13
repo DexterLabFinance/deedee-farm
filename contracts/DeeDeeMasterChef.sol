@@ -101,6 +101,9 @@ contract MasterChef is Ownable {
     // Max harvest interval: 14 days.
     uint256 public MAXIMUM_HARVEST_INTERVAL = 14 days;
 
+    //DEAD TOKENS ADDRESS
+    address public constant DEAD_TOKENS = 0x000000000000000000000000000000000000dEaD;
+
 
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
@@ -352,7 +355,7 @@ contract MasterChef is Ownable {
                     }
                     //discount poolBoostFeeAmount=50%
                     uint256 halfRewards = totalRewards.mul(poolBoostFeeAmount).div(100);
-                    safeDEEDEETransfer(feeAddress, halfRewards);
+                    safeDEEDEETransfer(DEAD_TOKENS, halfRewards);
                     safeDEEDEETransfer(msg.sender, halfRewards);
                     //user.nextHarvestUntil = user.nextHarvestUntil.add(pool.harvestInterval);
                     emit Boost(msg.sender, _pid, user.boost);
@@ -365,7 +368,7 @@ contract MasterChef is Ownable {
                     uint256 netRewards = totalRewards.sub(taxRewards);
 
                     // send rewards
-                    safeDEEDEETransfer(feeAddress, taxRewards);
+                    safeDEEDEETransfer(DEAD_TOKENS, taxRewards);
                     safeDEEDEETransfer(msg.sender, netRewards);
                     emit Harvest(msg.sender, _pid, netRewards);
                 }
