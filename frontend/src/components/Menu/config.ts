@@ -7,7 +7,7 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Dexter',
-        href: 'https://dexterlab-farm.vercel.app/',
+        href: 'https://dexterlab.finance',
       },
       {
         label: 'DeeDees',
