@@ -11,7 +11,7 @@ const config: MenuEntry[] = [
       },
       {
         label: 'DeeDees',
-        href: 'https://deedee-farm.vercel.app/',
+        href: 'https://deedee.dexterlab.finance',
       },
       {
         label: 'Mandark (In Progress)',
