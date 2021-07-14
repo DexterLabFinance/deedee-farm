@@ -130,7 +130,7 @@ const fetchFarms = async () => {
         harvestInterval: new BigNumber(info.harvestInterval._hex).toNumber(),
         deedeePerBlock: new BigNumber(deedeePerBlock).toNumber(),
         maxBoostAmount: new BigNumber(maxBoostAmount).toNumber(),
-        poolBoostFeeAmount: new BigNumber(poolBoostFeeAmount).toNumber()
+        POOL_BOOST_FEE: new BigNumber(poolBoostFeeAmount).toNumber()
       }
     }),
   )
