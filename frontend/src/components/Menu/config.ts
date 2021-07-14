@@ -30,11 +30,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
+        href: 'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x71eee06829cf9b168ca2e4a5294f49ecc949f16c',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.pancakeswap.finance/#/add/BNB/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
+        href: 'https://exchange.pancakeswap.finance/#/add/BNB/0x71eee06829cf9b168ca2e4a5294f49ecc949f16c',
       },
     ],
   },
@@ -54,11 +54,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'PancakeSwap',
-        href: 'https://pancakeswap.info/token/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
+        href: 'https://pancakeswap.info/token/0x71eee06829cf9b168ca2e4a5294f49ecc949f16c',
       },
       {
         label: 'DEEDEE Chart',
-        href: 'https://poocoin.app/tokens/0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
+        href: 'https://poocoin.app/tokens/0x71eee06829cf9b168ca2e4a5294f49ecc949f16c',
       },
       {
         label: 'Dappradar',

@@ -59,10 +59,12 @@ const Home: React.FC = () => {
     <Page>
       <Hero>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
-          {'DexterLab Finance'}
+          {'DexterLab - DeeDee Edition'}
         </Heading>
         <Heading as="h1" size="lg" mb="24px" color="success">
-          {'DeeDee Edition'}
+          <p>
+            Farming starts at block <u><a href="https://bscscan.com/block/countdown/9210000">9210000</a></u>.
+          </p>
         </Heading>
         <Text>{TranslateString(578, 'The most cartoonish DEFI app on Binance Smart Chain.')}</Text>
       </Hero>

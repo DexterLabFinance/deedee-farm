@@ -111,7 +111,7 @@ const fetchFarms = async () => {
         },
         {
           address: getMasterChefAddress(),
-          name: 'poolBoostFeeAmount',
+          name: 'POOL_BOOST_FEE',
         },
       ])
 

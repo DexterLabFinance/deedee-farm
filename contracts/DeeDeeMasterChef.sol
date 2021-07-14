@@ -74,7 +74,7 @@ contract MasterChef is Ownable {
     //Amount to be added to the boost on every click of the boost button. 100 means 1% increase
     uint256 public userBoostAmount = 10000;
     //Amount % to be paid for doing Boost on a Farm/Pool
-    uint256 public poolBoostFeeAmount = 50;
+    uint256 public constant POOL_BOOST_FEE = 50;
     //max boost per pool
     uint256 public maxBoostAmount = 30000;
     // total amount of tokens minted due to boost
@@ -353,8 +353,8 @@ contract MasterChef is Ownable {
                     if (user.boost > maxBoostAmount) {
                         user.boost = maxBoostAmount;
                     }
-                    //discount poolBoostFeeAmount=50%
-                    uint256 halfRewards = totalRewards.mul(poolBoostFeeAmount).div(100);
+                    //discount POOL_BOOST_FEE=50%
+                    uint256 halfRewards = totalRewards.mul(POOL_BOOST_FEE).div(100);
                     safeDEEDEETransfer(DEAD_TOKENS, halfRewards);
                     safeDEEDEETransfer(msg.sender, halfRewards);
                     //user.nextHarvestUntil = user.nextHarvestUntil.add(pool.harvestInterval);
@@ -400,10 +400,9 @@ contract MasterChef is Ownable {
         }
     }
 
-    function setBoostAmounts (uint256 _maxBoostAmount, uint256 _userBoostAmount, uint256 _poolBoostFeeAmount) public onlyOwner {
+    function setBoostAmounts (uint256 _maxBoostAmount, uint256 _userBoostAmount) public onlyOwner {
         maxBoostAmount = _maxBoostAmount;
         userBoostAmount = _userBoostAmount;
-        poolBoostFeeAmount = _poolBoostFeeAmount;
     }
 
     function setPoolBoost (uint256 _pid, bool _isBoostEnabled) public onlyOwner {
