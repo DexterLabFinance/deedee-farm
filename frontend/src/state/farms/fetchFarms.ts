@@ -91,7 +91,7 @@ const fetchFarms = async () => {
         }
       }
 
-      const [info, totalAllocPoint, deedeePerBlock, maxBoostAmount, POOL_BOOST_FEE] = await multicall(masterchefABI, [
+      const [info, totalAllocPoint, deedeePerBlock, maxBoostAmount, poolBoostFeeAmount] = await multicall(masterchefABI, [
         {
           address: getMasterChefAddress(),
           name: 'poolInfo',
@@ -130,7 +130,7 @@ const fetchFarms = async () => {
         harvestInterval: new BigNumber(info.harvestInterval._hex).toNumber(),
         deedeePerBlock: new BigNumber(deedeePerBlock).toNumber(),
         maxBoostAmount: new BigNumber(maxBoostAmount).toNumber(),
-        POOL_BOOST_FEE: new BigNumber(POOL_BOOST_FEE).toNumber()
+        poolBoostFeeAmount: new BigNumber(poolBoostFeeAmount).toNumber()
       }
     }),
   )
