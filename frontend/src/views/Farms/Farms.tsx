@@ -77,8 +77,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
 
         if (farm.quoteTokenSymbol === QuoteToken.DXL) {
           totalValue = totalValue.times(dxlPrice.toFixed(2));
-            console.log('totalValue fixed', totalValue.times(dxlPrice.toFixed(2)));
-            console.log('totalValue', totalValue.times(dxlPrice));
         }
 
         if(totalValue.comparedTo(0) > 0){
