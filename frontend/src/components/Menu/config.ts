@@ -85,9 +85,9 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Audit by Techrate (In Progress)',
+    label: 'Audit by Techrate',
     icon: 'AuditIcon',
-    href: '/',
+    href: 'https://github.com/TechRate/Smart-Contract-Audits/blob/main/DeeDee%20Standart%20Smart%20Contract%20Security%20Audit.pdf',
   },
   {
     label: 'Review by Rugdoc',
