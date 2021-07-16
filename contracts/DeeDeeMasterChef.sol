@@ -97,9 +97,9 @@ contract MasterChef is Ownable {
     // Maximum deposit fee rate: 10%
     uint16 public constant MAXIMUM_DEPOSIT_FEE_RATE = 1000;
     // Min Havest interval: 1 hour
-    uint256 public MINIMUM_HARVEST_INTERVAL = 3600;
+    uint256 public constant MINIMUM_HARVEST_INTERVAL = 3600;
     // Max harvest interval: 14 days.
-    uint256 public MAXIMUM_HARVEST_INTERVAL = 14 days;
+    uint256 public constant MAXIMUM_HARVEST_INTERVAL = 14 days;
 
     //DEAD TOKENS ADDRESS
     address public constant DEAD_TOKENS = 0x000000000000000000000000000000000000dEaD;
@@ -451,15 +451,5 @@ contract MasterChef is Ownable {
     // Update start reward block
     function setStartRewardBlock(uint256 _block) public onlyOwner {
         startBlock = _block;
-    }
-
-    // Update min harvest interval
-    function setMinHarvestInterval(uint256 _min) public onlyOwner {
-        MINIMUM_HARVEST_INTERVAL = _min;
-    }
-
-    // Update max harvest interval
-    function setMaxHarvestInterval(uint256 _max) public onlyOwner {
-        MAXIMUM_HARVEST_INTERVAL = _max;
     }
 }

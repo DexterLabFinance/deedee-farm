@@ -35,6 +35,22 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.busd,
   },
   {
+    pid: 12,
+    risk: 5,
+    lpSymbol: 'DEEDEE-DXL LP',
+    lpAddresses: {
+      97: '',
+      56: '0x135CE8D4253C07c407b4c7bD951d81f1d64d0f43',
+    },
+    tokenSymbol: 'DEEDEE',
+    tokenAddresses: {
+      97: '',
+      56: '0x71eee06829cf9B168ca2E4a5294f49Ecc949f16C',
+    },
+    quoteTokenSymbol: QuoteToken.DXL,
+    quoteTokenAdresses: contracts.dxl,
+  },
+  {
     pid: 2,
     risk: 5,
     isTokenOnly: true,

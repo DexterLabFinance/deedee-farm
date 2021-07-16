@@ -5,6 +5,7 @@ import useRefresh from 'hooks/useRefresh'
 import { fetchFarmsPublicDataAsync, fetchPoolsPublicDataAsync, fetchPoolsUserDataAsync } from './actions'
 import { State, Farm, Pool } from './types'
 import { QuoteToken } from '../config/constants/types'
+import { useGetDXLPrice } from 'hooks/api'
 
 const ZERO = new BigNumber(0)
 
@@ -76,6 +77,20 @@ export const usePriceBnbBusd = (): BigNumber => {
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
+export const usePriceDXLBusd = (): BigNumber => {
+  let dxlPrice = 0;
+  const initialPrice = 0.5;
+  let result = useGetDXLPrice()
+  if (result) {
+    dxlPrice = parseFloat(result.data.data.ethereum.dexTrades['0'].quotePrice.toFixed(2));
+  }
+  else {
+    dxlPrice = initialPrice
+  }
+  let dxlParsed:BigNumber = new BigNumber(dxlPrice);
+  return dxlParsed
+}
+
 export const usePriceCakeBusd = (): BigNumber => {
   // const pid = 1 // CAKE-BNB LP
   // const bnbPriceUSD = usePriceBnbBusd()
@@ -89,6 +104,7 @@ export const usePriceCakeBusd = (): BigNumber => {
 export const useTotalValue = (): BigNumber => {
   const farms = useFarms();
   const bnbPrice = usePriceBnbBusd();
+  const dxlPrice = usePriceDXLBusd();
   const cakePrice = usePriceCakeBusd();
   let value = new BigNumber(0);
   for (let i = 0; i < farms.length; i++) {
@@ -97,7 +113,10 @@ export const useTotalValue = (): BigNumber => {
       let val;
       if (farm.quoteTokenSymbol === QuoteToken.BNB) {
         val = (bnbPrice.times(farm.lpTotalInQuoteToken));
-      }else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+      } else if (farm.quoteTokenSymbol === QuoteToken.DXL) {
+        val = (dxlPrice.times(farm.lpTotalInQuoteToken));
+      }
+      else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
         val = (cakePrice.times(farm.lpTotalInQuoteToken));
       }else{
         val = (farm.lpTotalInQuoteToken);

@@ -8,7 +8,7 @@ import { Image, Heading } from '@pancakeswap-libs/uikit'
 import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK, CAKE_POOL_PID } from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceBnbBusd, usePriceCakeBusd } from 'state/hooks'
+import { useFarms, usePriceBnbBusd, usePriceCakeBusd, usePriceDXLBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
@@ -27,6 +27,8 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsLP = useFarms()
   const cakePrice = usePriceCakeBusd()
   const bnbPrice = usePriceBnbBusd()
+  const dxlPrice = usePriceDXLBusd()
+
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const {tokenMode} = farmsProps;
 
@@ -67,11 +69,16 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
 
         let apy = cakePrice.times(cakeRewardPerYear);
-
         let totalValue = new BigNumber(farm.lpTotalInQuoteToken || 0);
 
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
           totalValue = totalValue.times(bnbPrice);
+        }
+
+        if (farm.quoteTokenSymbol === QuoteToken.DXL) {
+          totalValue = totalValue.times(dxlPrice.toFixed(2));
+            console.log('totalValue fixed', totalValue.times(dxlPrice.toFixed(2)));
+            console.log('totalValue', totalValue.times(dxlPrice));
         }
 
         if(totalValue.comparedTo(0) > 0){
@@ -86,13 +93,14 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           farm={farm}
           removed={removed}
           bnbPrice={bnbPrice}
+          dxlPrice={dxlPrice}
           cakePrice={cakePrice}
           ethereum={ethereum}
           account={account}
         />
       ))
     },
-    [bnbPrice, account, cakePrice, ethereum],
+    [bnbPrice, account, cakePrice, dxlPrice, ethereum],
   )
 
 

@@ -11,6 +11,10 @@ export default {
     56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
     97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
   },
+  dxl: {
+    56: '0x8f16a16eacaa15d2e17fd97657cbfaa8066626ae',
+    97: '',
+  },
   lottery: {
     56: '',
     97: '',

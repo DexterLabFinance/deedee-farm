@@ -5,8 +5,8 @@ import './BEP20.sol';
 
 // DEEDEE Token with Governance.
 contract DeeDee is BEP20 {
-    // Max transfer amount rate in basis points. (default is 0.5% of total supply)
-    uint16 public maxTransferAmountRate = 50;
+    // Max transfer amount rate in basis points. (default is 5% of total supply)
+    uint16 public maxTransferAmountRate = 500;
     // Addresses that excluded from antiWhale
     mapping(address => bool) private _excludedFromAntiWhale;
 
@@ -79,7 +79,7 @@ contract DeeDee is BEP20 {
      */
     function updateMaxTransferAmountRate(uint16 _maxTransferAmountRate) public onlyOperator {
         require(_maxTransferAmountRate <= 1000, "DEEDEE::updateMaxTransferAmountRate: Max transfer amount rate must not exceed the maximum rate (10% of supply).");
-        require(_maxTransferAmountRate >= 1, "DEEDEE::updateMaxTransferAmountRate: Max transfer amount rate must be at least 0.01% of supply");
+        require(_maxTransferAmountRate >= 50, "DEEDEE::updateMaxTransferAmountRate: Max transfer amount rate must be at least 0.5% of supply");
         emit MaxTransferAmountRateUpdated(msg.sender, maxTransferAmountRate, _maxTransferAmountRate);
         maxTransferAmountRate = _maxTransferAmountRate;
     }
