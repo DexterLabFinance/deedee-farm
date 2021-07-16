@@ -66,15 +66,11 @@ const config: MenuEntry[] = [
       },
       {
         label: 'Dappradar',
-        href: 'https://dappradar.com/binance-smart-chain/defi/DEEDEE-cartoonish-yield-farm',
+        href: 'https://dappradar.com/binance-smart-chain/defi/deedee-s-room-dxl-finance',
       },
       {
-        label: 'dapp.com',
-        href: 'https://www.dapp.com/app/dexter-s-lab',
-      },
-      {
-        label: 'vfat.tools',
-        href: 'https://vfat.tools/bsc/dexterlab/',
+        label: 'vfat.tools (In Progress)',
+        href: '/',
       },
     ],
   },
@@ -89,14 +85,14 @@ const config: MenuEntry[] = [
     ],
   },
   {
-    label: 'Audit by Techrate',
+    label: 'Audit by Techrate (In Progress)',
     icon: 'AuditIcon',
-    href: 'https://github.com/TechRate/Smart-Contract-Audits/blob/main/DexterLab%20Standart%20Smart%20Contract%20Security%20Audit.pdf',
+    href: '/',
   },
   {
     label: 'Review by Rugdoc',
     icon: 'AuditIcon',
-    href: 'https://rugdoc.io/project/dexterlab/',
+    href: 'https://rugdoc.io/project/dexterlab-deedee-edition/',
   },
 ]
 
