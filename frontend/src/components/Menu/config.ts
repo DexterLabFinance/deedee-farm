@@ -69,7 +69,7 @@ const config: MenuEntry[] = [
         href: 'https://dappradar.com/binance-smart-chain/defi/deedee-s-room-dxl-finance',
       },
       {
-        label: 'vfat.tools (In Progress)',
+        label: 'vfat.tools',
         href: 'https://vfat.tools/bsc/deedee/',
       },
     ],
