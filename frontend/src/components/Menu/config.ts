@@ -36,6 +36,10 @@ const config: MenuEntry[] = [
         label: 'Liquidity',
         href: 'https://exchange.pancakeswap.finance/#/add/BNB/0x71eee06829cf9b168ca2e4a5294f49ecc949f16c',
       },
+      {
+        label: 'Swap',
+        href: 'https://swap.dexterlab.finance',
+      },
     ],
   },
   {
