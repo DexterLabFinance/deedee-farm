@@ -70,7 +70,7 @@ const config: MenuEntry[] = [
       },
       {
         label: 'vfat.tools (In Progress)',
-        href: '/',
+        href: 'https://vfat.tools/bsc/deedee/',
       },
     ],
   },
