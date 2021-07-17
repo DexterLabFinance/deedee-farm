@@ -174,23 +174,23 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, dxlPrice,
         <Text bold style={{ fontSize: '18px' }}>{(farm.depositFeeBP / 100)}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Harvest Tax:</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>
+        <Text style={{ fontSize: '18px' }}>Harvest Tax</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>:
         <Text bold style={{ fontSize: '18px' }}>{harvestTax}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Tax Period:</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>
+        <Text style={{ fontSize: '18px' }}>Tax Period</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>:
         <Text bold style={{ fontSize: '18px' }}>{farm.harvestInterval/3600}h</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Current Boost:</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>
+        <Text style={{ fontSize: '18px' }}>Current Boost</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>:
         <Text bold style={{ fontSize: '18px' }}>{userPoolBoost > 0 ? userPoolBoost/100 : userPoolBoost}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Max Boost:</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>
+        <Text style={{ fontSize: '18px' }}>Max Boost</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>:
         <Text bold style={{ fontSize: '18px' }}>{farm.maxBoostAmount/100}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Boost Fee:</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>
+        <Text style={{ fontSize: '18px' }}>Boost Fee</Text> <a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"></a>:
         <Text bold style={{ fontSize: '18px' }}>{farm.poolBoostFeeAmount}%</Text>
       </Flex>
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
