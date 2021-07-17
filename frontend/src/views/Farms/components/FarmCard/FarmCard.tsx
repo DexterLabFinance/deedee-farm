@@ -58,8 +58,9 @@ const StyledCardAccent = styled.div`
 const StyledTaxInfo = styled.div`
   width: 15px;
   height: 15px;
-  margin-left: 5px;
+  margin-left: -40px;
   margin-right: 2px;
+  margin-top: 7px;
   cursor: pointer;
 `
 
@@ -182,15 +183,15 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, dxlPrice,
         <Text bold style={{ fontSize: '18px' }}>{(farm.depositFeeBP / 100)}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Harvest Tax:</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>:
+        <Text style={{ fontSize: '18px' }}>Harvest Tax</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>
         <Text bold style={{ fontSize: '18px' }}>{harvestTax}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Tax Period:</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>:
+        <Text style={{ fontSize: '18px' }}>Tax Period</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/harvest-tax"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>
         <Text bold style={{ fontSize: '18px' }}>{farm.harvestInterval/3600}h</Text>
       </Flex>
       <Flex justifyContent='space-between'>
-        <Text style={{ fontSize: '18px' }}>Current Boost:</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>:
+        <Text style={{ fontSize: '18px' }}>Current Boost</Text> <StyledTaxInfo><a href="https://dexterlabfinance.gitbook.io/dexterlab-finance/features/deedee-features/pool-boost"><img src="https://deedee.dexterlab.finance/images/dexl/question.png"/></a></StyledTaxInfo>
         <Text bold style={{ fontSize: '18px' }}>{userPoolBoost > 0 ? userPoolBoost/100 : userPoolBoost}%</Text>
       </Flex>
       <Flex justifyContent='space-between'>
