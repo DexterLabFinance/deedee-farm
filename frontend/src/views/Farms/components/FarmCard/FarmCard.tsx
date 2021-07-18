@@ -58,9 +58,9 @@ const StyledCardAccent = styled.div`
 const StyledTaxInfo = styled.div`
   width: 15px;
   height: 15px;
-  margin-left: -80px;
+  margin-left: -75px;
   margin-right: 2px;
-  margin-top: 7px;
+  margin-top: 6px;
   cursor: pointer;
 `
 
